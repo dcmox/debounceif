@@ -1,0 +1,168 @@
+<html>
+	<head>
+        <title>DebounceIf Examples</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0 auto;}
+            button { padding: 4px 8px; }
+            #content { max-width: 800px; margin: 40px auto; }
+            label { padding-right: 10px; }
+            hr { height: 0; color: #000; border: 1px solid #ddd; width: 100%; }
+            #debounceIf { padding: 6px; border: 1px solid #eee; color: #444; margin: 10px; border-radius: 6px; text-align: center; display: none; } 
+            #debounced { padding: 6px; border: 1px solid #ddd; color: #444; margin: 10px; border-radius: 6px; text-align: center; opacity: 0; background-color: #fafafa; } 
+        </style>
+	</head>
+	<body>
+        <div id="content">
+            <h1>DebounceIf Demo</h1>
+            <label for="debounce">Search</label> <input type="text" id="debounce" /><br />
+            
+            <h3>Debounced Search Suggestions</h3>
+            <div id="suggestions"></div>
+
+            <hr />
+
+            <h3>DebouncedIf Condition</h3>
+            <button id="debounceIfTest">DebounceIf</button>
+            <div id="debounceIf"></div>
+            <div id="debounced"></div>
+        </div>
+    </body>
+    <script>var exports = {};</script>
+    <script src="../debounceIf.js"></script>
+	<script>
+        const words = [
+            'art',
+            'artsy',
+            'angry',
+            'abc',
+            'apple',
+            'amazon',
+            'bob',
+            'boy',
+            'bar',
+            'banana',
+            'brain',
+            'brandy',
+            'bacon',
+            'cute',
+            'craft',
+            'crafty',
+            'cat',
+            'conway',
+            'conner',
+            'crazy',
+            'cathrine',
+            'courage',
+            'dungeon',
+            'dungeons',
+            'daniel',
+            'dragon',
+            'dog',
+            'elephant',
+            'elegant',
+            'empathy',
+            'friend',
+            'feeling',
+            'feelings',
+            'foo',
+            'foobar',
+            'food',
+            'foods',
+            'good',
+            'great',
+            'hint',
+            'hippo',
+            'hotel',
+            'ham',
+            'hamburger',
+            'hammy',
+            'heimlich',
+            'henry',
+            'hot',
+            'hotter',
+            'hottest',
+            'igloo',
+            'intelligence',
+            'juggernaut',
+            'kitchen',
+            'kit',
+            'lamborgini',
+            'microsoft',
+            'mouse',
+            'michael',
+            'moxon',
+            'nugget',
+            'no',
+            'never',
+            'naught',
+            'naughty',
+            'night',
+            'open',
+            'people',
+            'pokemon',
+            'plaza',
+            'proud',
+            'perfect',
+            'quest',
+            'rest',
+            'radiant',
+            'savior',
+            'sun',
+            'sunny',
+            'summer',
+            'star',
+            'star wars',
+            'temple',
+            'ugly',
+            'violin',
+            'world',
+            'wide',
+            'web',
+            'xenoblade',
+            'yo',
+            'yes',
+            'yesterday',
+            'yellow',
+            'zero'
+        ]
+        document.getElementById('debounce').onkeypress = (event) => {
+            exports.debounce(() => {
+                const search = event.target.value
+                const suggestions = words.filter((word) => word.startsWith(search.toLowerCase())).sort().join('<br />')
+                document.getElementById('suggestions').innerHTML = suggestions
+            }, 500)
+        }
+
+        // Alternative method:
+        // debounce = new exports.DebounceIf(debounceFunc, timeMs, ifCond)
+        // debounce.debounce()
+
+        document.getElementById('debounceIfTest').onclick = (event) => {
+            document.getElementById('debounceIf').style.display = 'block'
+            document.getElementById('debounced').style.opacity = 0
+            document.getElementById('debounceIf').innerHTML = 'Debounced 0 times!'
+            document.getElementById('debounced').innerHTML = ''
+            let count = 0
+            exports.debounceIf(() => { // Debounced Method
+                let opacity = 0
+                const timer = setInterval(() => { 
+                    opacity += 0.1
+                    document.getElementById('debounced').style.opacity = opacity
+                    if (document.getElementById('debounced').style.opacity >= 1){
+                        opacity = 0
+                        clearInterval(timer)
+                    }
+                }, 50)
+                document.getElementById('debounced').innerHTML = 'Debounced after 5 checks!'
+            }, 500, () => { // if condition is met (return true)
+                count++
+                document.getElementById('debounceIf').innerHTML = 'Debounced ' + count + ' times!'
+                if (count >= 5) {
+                    count = 0
+                    return true
+                }
+            })
+        }
+    </script>
+    <!-- This demo was created by Daniel Moxon @ github.com/dcmox -->
+</html>
