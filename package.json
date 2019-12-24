@@ -1,7 +1,7 @@
 {
   "name": "debounceif",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "description": "DebounceIf a condition is met.",
   "main": "debounceIf.js",
   "engines": {
