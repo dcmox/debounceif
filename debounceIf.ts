@@ -75,3 +75,5 @@ export class DebounceIf {
         }, this._timeMs)
     }
 }
+
+module.exports = DebounceIf

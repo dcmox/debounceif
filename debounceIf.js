@@ -74,3 +74,4 @@ var DebounceIf = /** @class */ (function () {
     return DebounceIf;
 }());
 exports.DebounceIf = DebounceIf;
+module.exports = DebounceIf;
