@@ -1,14 +1,12 @@
-"use strict";
-exports.__esModule = true;
-var debounceIf_1 = require("../debounceIf");
-debounceIf_1.debounce(function () {
+var _ = require('../debounceIf');
+_.debounce(function () {
     console.log('Debounced after 1s!');
 }, 1000);
 var isLoading = true;
-setTimeout(function () { return isLoading = false; }, 5000);
+setTimeout(function () { return (isLoading = false); }, 5000);
 // Example using function
 var dots = '';
-debounceIf_1.debounceIf(function () {
+_.debounceIf(function () {
     console.log('Debounced after condition is met!');
 }, 500, function () {
     dots += '.';
@@ -19,7 +17,7 @@ debounceIf_1.debounceIf(function () {
     return !isLoading;
 });
 // Example with class instantiation
-var debounceInst = new debounceIf_1.DebounceIf(function () {
+var debounceInst = new _.DebounceIf(function () {
     console.log('Debounced from DebouncedIf() instance after 2s!');
 }, 2000);
 debounceInst.debounce();

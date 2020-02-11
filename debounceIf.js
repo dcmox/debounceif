@@ -1,7 +1,5 @@
-"use strict";
-exports.__esModule = true;
 var debounceIfMap = {};
-exports.debounce = function (func, timeMs) {
+var debounce = function (func, timeMs) {
     if (timeMs === void 0) { timeMs = 500; }
     var fn = func.toString();
     if (debounceIfMap[fn] === undefined) {
@@ -9,7 +7,7 @@ exports.debounce = function (func, timeMs) {
     }
     debounceIfMap[fn].debounce();
 };
-exports.debounceIf = function (func, timeMs, debounceIf) {
+var debounceIf = function (func, timeMs, debounceIf) {
     if (timeMs === void 0) { timeMs = 500; }
     if (debounceIf === void 0) { debounceIf = false; }
     var fn = func.toString();
@@ -69,9 +67,13 @@ var DebounceIf = /** @class */ (function () {
         };
         this._func = func;
         this._timeMs = timeMs;
-        this._ifCond = ifCond === true ? this.ifLimitFunc : ifCond ? ifCond : null;
+        this._ifCond =
+            ifCond === true ? this.ifLimitFunc : ifCond ? ifCond : null;
     }
     return DebounceIf;
 }());
-exports.DebounceIf = DebounceIf;
-module.exports = DebounceIf;
+module.exports = {
+    DebounceIf: DebounceIf,
+    debounceIf: debounceIf,
+    debounce: debounce
+};
